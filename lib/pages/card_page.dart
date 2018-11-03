@@ -1,5 +1,6 @@
 import 'package:droztips/blocs/bloc_provider.dart';
 import 'package:droztips/models/tip.dart';
+import 'package:droztips/util/card_page_detail.dart';
 import 'package:droztips/util/card_page_item.dart';
 import 'package:flutter/material.dart';
 import 'package:droztips/blocs/application_bloc.dart';
@@ -64,10 +65,18 @@ class CardPageState extends State<CardPage> with TickerProviderStateMixin {
           itemCount: snapshot.data == null ? 0 : snapshot.data.length,
           itemBuilder: (BuildContext context, int index) {
             final item = snapshot.data[index];
-            //final pageVisibility = visibilityResolver.resolvePageVisibility(index);
-            return CardItem(
-              item: item,
-              //pageVisibility: pageVisibility,
+            return GestureDetector(
+              child: Hero(
+                tag: 'imageHero',
+                child: CardItem(
+                  item: item,
+                ),
+              ),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return DetailPage();
+                }));
+              },
             );
           },
         );

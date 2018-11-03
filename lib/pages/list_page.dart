@@ -48,11 +48,11 @@ class _ListPageState extends State<ListPage> {
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: new ListTile(
-                leading: new Image.asset(
+                /*leading: new Image.asset(
                   snapshot.data[index].image,
                   height: 50.0,
                   width: 50.0,
-                ),
+                ),*/
                 title: new Text(snapshot.data[index].title),
                 subtitle: new Text("test"),
                 trailing: new Column(

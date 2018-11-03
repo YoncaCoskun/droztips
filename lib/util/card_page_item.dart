@@ -1,25 +1,22 @@
 import 'package:droztips/models/tip.dart';
+import 'package:droztips/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class CardItem extends StatelessWidget {
   CardItem({
     @required this.item,
-    //@required this.pageVisibility,
   });
   final Tip item;
-  //final PageVisibility pageVisibility;
 
   Widget _applyTextEffects({
     @required double translationFactor,
     @required Widget child,
   }) {
-    //final double xTranslation = pageVisibility.pagePosition * translationFactor;
     final double xTranslation = 0.2;
 
     return Opacity(
-      //opacity: pageVisibility.visibleFraction,
-      opacity: 0.2,
+      opacity: 0.8,
       child: Transform(
         alignment: FractionalOffset.topLeft,
         transform: Matrix4.translationValues(
@@ -33,35 +30,73 @@ class CardItem extends StatelessWidget {
   }
 
   _buildTextContainer(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-    /*var categoryText = _applyTextEffects(
-      translationFactor: 300.0,
-      child: Text(
-        item.title,
-        style: textTheme.caption.copyWith(
-          color: Colors.white70,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 2.0,
-          fontSize: 14.0,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-*/
+    /*var textTheme = Theme.of(context).textTheme;
     var titleText = _applyTextEffects(
       translationFactor: 200.0,
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: Text(
-          item.tip,
+          item.title,
           style: textTheme.title
               .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),
-    );
+    );*/
 
     return Positioned(
+      left: 0.0,
+      right: 0.0,
+      bottom: 0.0,
+      child: new Container(
+        decoration: new BoxDecoration(
+          gradient: new LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent,
+                Colors.black.withOpacity(0.8),
+              ]),
+        ),
+        padding: const EdgeInsets.all(24.0),
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            new Expanded(
+                child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new Text(
+                  item.title,
+                  style: new TextStyle(
+                    color: Colors.white,
+                    fontSize: 24.0,
+                  ),
+                )
+              ],
+            )),
+            new RoundIconButton.small(
+              icon: Icons.favorite,
+              iconColor: Colors.white,
+              onPressed: () {
+                final snackBar = SnackBar(
+                  content: Text('Beğendiniz !'),
+                  action: SnackBarAction(
+                    label: '',
+                    onPressed: () {
+                      // Some code to undo the change!
+                    },
+                  ),
+                );
+                Scaffold.of(context).showSnackBar(snackBar);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+    /* Positioned(
       bottom: 56.0,
       left: 32.0,
       right: 32.0,
@@ -70,9 +105,25 @@ class CardItem extends StatelessWidget {
         children: [
           //categoryText,
           titleText,
+          new RoundIconButton.large(
+            icon: Icons.favorite,
+            iconColor: Colors.white,
+            onPressed: () {
+              final snackBar = SnackBar(
+                content: Text('Beğendiniz !'),
+                action: SnackBarAction(
+                  label: '',
+                  onPressed: () {
+                    // Some code to undo the change!
+                  },
+                ),
+              );
+              Scaffold.of(context).showSnackBar(snackBar);
+            },
+          ),
         ],
       ),
-    );
+    );*/
   }
 
   @override
