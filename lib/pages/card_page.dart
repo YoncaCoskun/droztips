@@ -11,13 +11,10 @@ class CardPage extends StatefulWidget {
 }
 
 class CardPageState extends State<CardPage> with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     final ApplicationBloc tipsBloc = BlocProvider.of<ApplicationBloc>(context);
     return (new Scaffold(
-      key: _scaffoldKey,
       appBar: _buildAppBar(),
       body: _buildCardStack(tipsBloc),
     ));
@@ -74,10 +71,9 @@ class CardPageState extends State<CardPage> with TickerProviderStateMixin {
                 child: new Material(
                   child: new InkWell(
                     onTap: () => Navigator.of(context).push(
-                          new MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  new DetailPage(type: item)),
-                        ),
+                        new MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                new DetailPage(type: item))),
                     child: CardItem(
                       item: item,
                     ),
@@ -89,29 +85,3 @@ class CardPageState extends State<CardPage> with TickerProviderStateMixin {
     );
   }
 }
-
-/*class Detail extends StatelessWidget {
-  Detail({this.type});
-  final Tip type;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text("Deneme"),
-      ),
-      body: new Stack(
-        children: <Widget>[
-          new Hero(
-            tag: type,
-            child: new Material(
-              child: new InkWell(
-                onTap: () => Navigator.of(context).pop(),
-                child: new Image.asset(type.image),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}*/

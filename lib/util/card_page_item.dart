@@ -80,7 +80,7 @@ class CardItem extends StatelessWidget {
               icon: Icons.favorite,
               iconColor: Colors.white,
               onPressed: () {
-                final snackBar = SnackBar(
+                SnackBar(
                   content: Text('Beğendiniz !'),
                   action: SnackBarAction(
                     label: '',

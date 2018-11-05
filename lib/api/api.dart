@@ -1,5 +1,4 @@
 import 'package:droztips/models/tip.dart';
-import 'package:flutter/material.dart';
 
 class Api {
   List<Tip> list;
@@ -40,11 +39,6 @@ class Api {
         title: " Title4 deneme");
 
     list = [card1, card2, card3, card4];
-    /*int a = 0;
-    while (a < 20) {
-      list.add(card4);
-      a++;
-    }*/
 
     return list;
   }
