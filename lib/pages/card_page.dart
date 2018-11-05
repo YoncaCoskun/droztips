@@ -60,27 +60,58 @@ class CardPageState extends State<CardPage> with TickerProviderStateMixin {
     return StreamBuilder<List<Tip>>(
       stream: tipsBloc.outTipList,
       builder: (BuildContext context, AsyncSnapshot<List<Tip>> snapshot) {
-        return PageView.builder(
-          controller: PageController(viewportFraction: 0.85),
-          itemCount: snapshot.data == null ? 0 : snapshot.data.length,
-          itemBuilder: (BuildContext context, int index) {
-            final item = snapshot.data[index];
-            return GestureDetector(
-              child: Hero(
-                tag: 'imageHero',
-                child: CardItem(
-                  item: item,
+        return new PageView.builder(
+            controller: PageController(viewportFraction: 0.85),
+            itemCount: snapshot.data == null ? 0 : snapshot.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (!snapshot.hasData) {
+                CircularProgressIndicator();
+              }
+
+              final item = snapshot.data[index];
+              return new Hero(
+                tag: item.id,
+                child: new Material(
+                  child: new InkWell(
+                    onTap: () => Navigator.of(context).push(
+                          new MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  new DetailPage(type: item)),
+                        ),
+                    child: CardItem(
+                      item: item,
+                    ),
+                  ),
                 ),
-              ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return DetailPage();
-                }));
-              },
-            );
-          },
-        );
+              );
+            });
       },
     );
   }
 }
+
+/*class Detail extends StatelessWidget {
+  Detail({this.type});
+  final Tip type;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text("Deneme"),
+      ),
+      body: new Stack(
+        children: <Widget>[
+          new Hero(
+            tag: type,
+            child: new Material(
+              child: new InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: new Image.asset(type.image),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}*/

@@ -28,11 +28,14 @@ class _ListPageState extends State<ListPage> {
       title: new Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            'List',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          new Text(
+            "DR. OZ TIPS",
+            style: new TextStyle(
+              fontSize: 15.0,
+              letterSpacing: 3.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ],
       ),
@@ -46,22 +49,30 @@ class _ListPageState extends State<ListPage> {
         return ListView.builder(
           itemCount: snapshot.data == null ? 0 : snapshot.data.length,
           itemBuilder: (BuildContext context, int index) {
+            if (!snapshot.hasData) {
+              CircularProgressIndicator();
+            }
+
             return Card(
               child: new ListTile(
-                /*leading: new Image.asset(
+                leading: new Image.asset(
                   snapshot.data[index].image,
                   height: 50.0,
                   width: 50.0,
-                ),*/
+                ),
                 title: new Text(snapshot.data[index].title),
                 subtitle: new Text("test"),
                 trailing: new Column(
                   children: <Widget>[
                     new RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        tipsBloc.inIndex.add(index);
+                      },
                       child: new Icon(
-                        Icons.favorite_border,
-                        color: Colors.red,
+                        snapshot.data[index].favorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: Color.fromRGBO(235, 64, 107, 1.0),
                         size: 18.0,
                       ),
                       shape: new CircleBorder(),

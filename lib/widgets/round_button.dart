@@ -33,6 +33,7 @@ class RoundIconButton extends StatelessWidget {
       child: new RawMaterialButton(
           shape: new CircleBorder(),
           elevation: 0.0,
+          fillColor: Color.fromRGBO(235, 64, 107, 1.0),
           child: new Icon(
             icon,
             color: iconColor,

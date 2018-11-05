@@ -36,15 +36,15 @@ class Api {
     Tip card4 = Tip(
         id: 4,
         image: 'assets/photo5.jpg',
-        tip: "Deneme3",
-        title: " Title3 deneme");
+        tip: "Deneme4",
+        title: " Title4 deneme");
 
     list = [card1, card2, card3, card4];
-    int a = 0;
+    /*int a = 0;
     while (a < 20) {
       list.add(card4);
       a++;
-    }
+    }*/
 
     return list;
   }
