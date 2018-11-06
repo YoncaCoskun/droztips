@@ -41,12 +41,14 @@ class FavoriteButton extends StatelessWidget {
                   stream: blocFav.outTotalFav,
                   initialData: 0,
                   builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                    /*Text(snapshot.data.toString(),
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold)); */
-                    Container();
+                    return Text(
+                      snapshot.data.toString(),
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
                   },
                 ),
               ),
