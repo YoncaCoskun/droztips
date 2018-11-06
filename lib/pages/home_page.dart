@@ -46,7 +46,9 @@ class _HomePageState extends State<HomePage>
           ],
         ),
         actions: <Widget>[
-          FavoriteButton(child: Text('data')),
+          FavoriteButton(
+            child: const Icon(Icons.favorite),
+          ),
         ],
       ),
       body: new TabBarView(

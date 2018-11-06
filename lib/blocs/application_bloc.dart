@@ -40,6 +40,9 @@ class ApplicationBloc implements BlocBase {
     if (item.favorite) {
       _favorites.add(item);
       inTotalFav.add(_favorites.length);
+    } else if (!item.favorite) {
+      _favorites.remove(item);
+      inTotalFav.add(_favorites.length);
     }
   }
 
