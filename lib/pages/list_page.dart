@@ -15,30 +15,7 @@ class _ListPageState extends State<ListPage> {
     final ApplicationBloc tipsBloc = BlocProvider.of<ApplicationBloc>(context);
     return new Scaffold(
       key: _scaffoldKey,
-      appBar: _buildAppBar(),
       body: _buildListView(tipsBloc),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return new AppBar(
-      elevation: 0.0,
-      backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
-      centerTitle: true,
-      title: new Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new Text(
-            "DR. OZ TIPS",
-            style: new TextStyle(
-              fontSize: 15.0,
-              letterSpacing: 3.5,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
     );
   }
 

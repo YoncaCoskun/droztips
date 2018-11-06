@@ -15,7 +15,6 @@ class CardPageState extends State<CardPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ApplicationBloc tipsBloc = BlocProvider.of<ApplicationBloc>(context);
     return (new Scaffold(
-      appBar: _buildAppBar(),
       body: _buildCardStack(tipsBloc),
     ));
   }
@@ -27,29 +26,6 @@ class CardPageState extends State<CardPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  //----Build App Bar-----
-  Widget _buildAppBar() {
-    return new AppBar(
-      elevation: 0.0,
-      backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
-      centerTitle: true,
-      title: new Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new Text(
-            "DR. OZ TIPS",
-            style: new TextStyle(
-              fontSize: 15.0,
-              letterSpacing: 3.5,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   //----Build Body -----
