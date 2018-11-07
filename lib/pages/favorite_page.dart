@@ -11,9 +11,7 @@ class FavoritesPage extends StatelessWidget {
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
-        centerTitle: true,
         title: new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Text(
               "Favorites",

@@ -29,10 +29,6 @@ class ApplicationBloc implements BlocBase {
   Sink<List<Tip>> get _inFavorites => _favoritesController.sink;
   Stream<List<Tip>> get outFavorites => _favoritesController.stream;
 
-//remove a card from the list of favorites
-  PublishSubject<int> _favoriteRemoveController = PublishSubject<int>();
-  Sink<int> get inRemoveFavorite => _favoriteRemoveController.sink;
-
   ApplicationBloc() {
     // Read all genres from Internet
     api.getData().then((list) {
@@ -69,6 +65,5 @@ class ApplicationBloc implements BlocBase {
     _favController.close();
     _favTotalController.close();
     _favoritesController.close();
-    _favoriteRemoveController.close();
   }
 }

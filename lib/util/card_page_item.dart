@@ -1,14 +1,14 @@
 import 'package:droztips/blocs/application_bloc.dart';
-import 'package:droztips/blocs/bloc_provider.dart';
 import 'package:droztips/models/tip.dart';
 import 'package:droztips/widgets/round_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:meta/meta.dart';
 
 class CardItem extends StatelessWidget {
   final Tip item;
-  ApplicationBloc tipsBloc;
-  int index;
+  final ApplicationBloc tipsBloc;
+  final int index;
 
   CardItem({
     @required this.item,
@@ -16,42 +16,8 @@ class CardItem extends StatelessWidget {
     this.index,
   });
 
-  Widget _applyTextEffects({
-    @required double translationFactor,
-    @required Widget child,
-  }) {
-    final double xTranslation = 0.2;
-
-    return Opacity(
-      opacity: 0.8,
-      child: Transform(
-        alignment: FractionalOffset.topLeft,
-        transform: Matrix4.translationValues(
-          xTranslation,
-          0.0,
-          0.0,
-        ),
-        child: child,
-      ),
-    );
-  }
-
   _buildTextContainer(
       BuildContext context, ApplicationBloc tipsBloc, int index) {
-    /*var textTheme = Theme.of(context).textTheme;
-    var titleText = _applyTextEffects(
-      translationFactor: 200.0,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Text(
-          item.title,
-          style: textTheme.title
-              .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );*/
-
     return Positioned(
       left: 0.0,
       right: 0.0,
@@ -95,20 +61,6 @@ class CardItem extends StatelessWidget {
               },
               fillColor: Colors.white,
             ),
-            /*new RawMaterialButton(
-              onPressed: () {
-                tipsBloc.inIndex.add(index);
-              },
-              child: new Icon(
-                item.favorite ? Icons.favorite : Icons.favorite_border,
-                color: Color.fromRGBO(235, 64, 107, 1.0),
-                size: 18.0,
-              ),
-              shape: new CircleBorder(),
-              elevation: 2.0,
-              fillColor: Colors.white,
-              padding: const EdgeInsets.all(12.0),
-            ),*/
           ],
         ),
       ),
@@ -117,7 +69,8 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //tipsBloc = BlocProvider.of<ApplicationBloc>(context);
+    timeDilation = 2.0;
+
     var image = Image.asset(
       item.image,
       fit: BoxFit.cover,

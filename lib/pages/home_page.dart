@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController controller;
+
   @override
   void initState() {
     super.initState();
@@ -29,17 +30,17 @@ class _HomePageState extends State<HomePage>
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
-        centerTitle: true,
         title: new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            //new GradientAppBar("treva"),
             new Text(
-              "DR. OZ TIPS",
+              "Dr. Oz Tips",
               style: new TextStyle(
-                fontSize: 15.0,
-                letterSpacing: 3.5,
-                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+                letterSpacing: 3.0,
+                //  fontWeight: FontWeight.w600,
                 color: Colors.white,
+                fontFamily: 'Acme',
               ),
             ),
           ],
