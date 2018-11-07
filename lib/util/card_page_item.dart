@@ -1,13 +1,20 @@
+import 'package:droztips/blocs/application_bloc.dart';
+import 'package:droztips/blocs/bloc_provider.dart';
 import 'package:droztips/models/tip.dart';
 import 'package:droztips/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class CardItem extends StatelessWidget {
+  final Tip item;
+  ApplicationBloc tipsBloc;
+  int index;
+
   CardItem({
     @required this.item,
+    this.tipsBloc,
+    this.index,
   });
-  final Tip item;
 
   Widget _applyTextEffects({
     @required double translationFactor,
@@ -29,7 +36,8 @@ class CardItem extends StatelessWidget {
     );
   }
 
-  _buildTextContainer(BuildContext context) {
+  _buildTextContainer(
+      BuildContext context, ApplicationBloc tipsBloc, int index) {
     /*var textTheme = Theme.of(context).textTheme;
     var titleText = _applyTextEffects(
       translationFactor: 200.0,
@@ -77,57 +85,39 @@ class CardItem extends StatelessWidget {
               ],
             )),
             new RoundIconButton.small(
-              icon: Icons.favorite,
-              iconColor: Colors.white,
+              icon: item.favorite ? Icons.favorite : Icons.favorite_border,
+              iconColor: Color.fromRGBO(235, 64, 107, 1.0),
               onPressed: () {
-                SnackBar(
-                  content: Text('Beğendiniz !'),
-                  action: SnackBarAction(
-                    label: '',
-                    onPressed: () {
-                      // Some code to undo the change!
-                    },
-                  ),
-                );
+                // Some code to undo the change!
+                tipsBloc.inIndex.add(index);
+
                 //Scaffold.of(context).showSnackBar(snackBar);
               },
+              fillColor: Colors.white,
             ),
+            /*new RawMaterialButton(
+              onPressed: () {
+                tipsBloc.inIndex.add(index);
+              },
+              child: new Icon(
+                item.favorite ? Icons.favorite : Icons.favorite_border,
+                color: Color.fromRGBO(235, 64, 107, 1.0),
+                size: 18.0,
+              ),
+              shape: new CircleBorder(),
+              elevation: 2.0,
+              fillColor: Colors.white,
+              padding: const EdgeInsets.all(12.0),
+            ),*/
           ],
         ),
       ),
     );
-    /* Positioned(
-      bottom: 56.0,
-      left: 32.0,
-      right: 32.0,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          //categoryText,
-          titleText,
-          new RoundIconButton.large(
-            icon: Icons.favorite,
-            iconColor: Colors.white,
-            onPressed: () {
-              final snackBar = SnackBar(
-                content: Text('Beğendiniz !'),
-                action: SnackBarAction(
-                  label: '',
-                  onPressed: () {
-                    // Some code to undo the change!
-                  },
-                ),
-              );
-              Scaffold.of(context).showSnackBar(snackBar);
-            },
-          ),
-        ],
-      ),
-    );*/
   }
 
   @override
   Widget build(BuildContext context) {
+    //tipsBloc = BlocProvider.of<ApplicationBloc>(context);
     var image = Image.asset(
       item.image,
       fit: BoxFit.cover,
@@ -163,7 +153,7 @@ class CardItem extends StatelessWidget {
           children: [
             image,
             imageOverlayGradient,
-            _buildTextContainer(context),
+            _buildTextContainer(context, tipsBloc, index),
           ],
         ),
       ),

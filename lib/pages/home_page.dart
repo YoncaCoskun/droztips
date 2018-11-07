@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        elevation: 0.0,
         backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
         centerTitle: true,
         title: new Row(
@@ -40,14 +39,17 @@ class _HomePageState extends State<HomePage>
                 fontSize: 15.0,
                 letterSpacing: 3.5,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ],
         ),
         actions: <Widget>[
           FavoriteButton(
-            child: const Icon(Icons.favorite),
+            child: const Icon(
+              Icons.favorite,
+              color: Color.fromRGBO(235, 64, 107, 1.0),
+            ),
           ),
         ],
       ),

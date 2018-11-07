@@ -4,7 +4,6 @@ import 'package:droztips/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-//  debugPrintRebuildDirtyWidgets = true;
   return runApp(BlocProvider<ApplicationBloc>(
     bloc: ApplicationBloc(),
     child: MyApp(),

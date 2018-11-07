@@ -1,21 +1,30 @@
+import 'package:droztips/blocs/application_bloc.dart';
 import 'package:droztips/models/tip.dart';
 import 'package:droztips/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
   final Tip type;
-  const DetailPage({this.type});
-  _DetailPageState createState() => _DetailPageState(type: type);
+  final ApplicationBloc tipsBloc;
+  final int index;
+
+  const DetailPage({this.type, this.tipsBloc, this.index});
+
+  _DetailPageState createState() =>
+      _DetailPageState(type: type, tipsBloc: tipsBloc, index: index);
 }
 
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   Tip type;
+  ApplicationBloc tipsBloc;
+  int index;
+
   AnimationController _containerController;
   Animation<double> width;
   Animation<double> height;
-  _DetailPageState({this.type});
+  _DetailPageState({this.type, this.tipsBloc, this.index});
 
   double _appBarHeight = 256.0;
   AppBarBehavior _appBarBehavior = AppBarBehavior.pinned;
@@ -169,11 +178,24 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                           child: new Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              new RoundIconButton.large(
+                              new RoundIconButton.small(
+                                icon: type.favorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                iconColor: Color.fromRGBO(235, 64, 107, 1.0),
+                                onPressed: () {
+                                  // Some code to undo the change!
+                                  tipsBloc.inIndex.add(index);
+
+                                  //Scaffold.of(context).showSnackBar(snackBar);
+                                },
+                                fillColor: Colors.white,
+                              ),
+                              /*new RoundIconButton.large(
                                 icon: Icons.favorite,
                                 iconColor: Colors.white,
                                 onPressed: () {},
-                              ),
+                              ),*/
                             ],
                           ))
                     ],

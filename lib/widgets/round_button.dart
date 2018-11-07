@@ -4,19 +4,24 @@ import 'package:flutter/material.dart';
 class RoundIconButton extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
+  final Color fillColor;
   final double size;
   final VoidCallback onPressed;
 
-  RoundIconButton.large({this.icon, this.iconColor, this.onPressed})
+  RoundIconButton.large(
+      {this.icon, this.iconColor, this.onPressed, this.fillColor})
       : size = 60.0;
 
-  RoundIconButton.small({this.icon, this.iconColor, this.onPressed})
+  RoundIconButton.small(
+      {this.icon, this.iconColor, this.onPressed, this.fillColor})
       : size = 50.0;
 
-  RoundIconButton.smallest({this.icon, this.iconColor, this.onPressed})
+  RoundIconButton.smallest(
+      {this.icon, this.iconColor, this.onPressed, this.fillColor})
       : size = 30.0;
 
-  RoundIconButton({this.icon, this.iconColor, this.size, this.onPressed});
+  RoundIconButton(
+      {this.icon, this.iconColor, this.size, this.onPressed, this.fillColor});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class RoundIconButton extends StatelessWidget {
       child: new RawMaterialButton(
           shape: new CircleBorder(),
           elevation: 0.0,
-          fillColor: Color.fromRGBO(235, 64, 107, 1.0),
+          fillColor: fillColor,
           child: new Icon(
             icon,
             color: iconColor,
