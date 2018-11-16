@@ -72,6 +72,7 @@ class _ListPageState extends State<ListPage> {
                     new RawMaterialButton(
                       onPressed: () {
                         tipsBloc.inIndex.add(index);
+                        print('onpress');
                       },
                       child: new Icon(
                         snapshot.data[index].favorite
