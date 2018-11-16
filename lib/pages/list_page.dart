@@ -1,6 +1,7 @@
 import 'package:droztips/blocs/application_bloc.dart';
 import 'package:droztips/blocs/bloc_provider.dart';
 import 'package:droztips/models/tip.dart';
+import 'package:droztips/util/card_page_detail.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatefulWidget {
@@ -16,6 +17,33 @@ class _ListPageState extends State<ListPage> {
     return new Scaffold(
       key: _scaffoldKey,
       body: _buildListView(tipsBloc),
+    );
+  }
+
+  Future<void> _openDialog({Tip item}) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(item.title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(item.tip),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -59,6 +87,17 @@ class _ListPageState extends State<ListPage> {
                     ),
                   ],
                 ),
+                /*onTap: () {
+                  _openDialog(item: snapshot.data[index]);
+                },*/
+                onTap: () => Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (BuildContext context) => new DetailPage(
+                            type: snapshot.data[index],
+                            tipsBloc: tipsBloc,
+                            index: index),
+                      ),
+                    ),
               ),
             );
           },
