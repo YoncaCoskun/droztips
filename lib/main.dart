@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   return runApp(BlocProvider<ApplicationBloc>(
-    bloc: ApplicationBloc(),
+    bloc: ApplicationBloc(), //bloc:
     child: MyApp(),
   ));
 }

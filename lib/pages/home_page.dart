@@ -4,9 +4,13 @@ import 'package:droztips/widgets/custom_tab.dart';
 import 'package:droztips/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_admob/firebase_admob.dart';
+import 'package:droztips/widgets/header_text.dart';
 
-//const APP_ID = "ca-app-pub-9868823063887131~4682191364";
-const APP_ID = "ca-app-pub-9868823063887131~4103892275";
+// TODO Encapsulate ADMOB
+// TODO Encapsulate Header Text
+
+const APP_ID = "ca-app-pub-9868823063887131~4682191364";
+//const APP_ID = "ca-app-pub-9868823063887131~4103892275";
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,11 +21,10 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   //admob
   static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices: APP_ID != null ? [APP_ID] : null,
+    testDevices: [APP_ID] ?? null,
     keywords: ['Games', 'Puzzles'],
   );
   BannerAd bannerAd;
-  InterstitialAd interstitialAd;
 
   BannerAd buildBanner() {
     return BannerAd(
@@ -31,17 +34,6 @@ class _HomePageState extends State<HomePage>
           print(event);
         });
   }
-
-  InterstitialAd buildInterstitial() {
-    return InterstitialAd(
-        adUnitId: InterstitialAd.testAdUnitId,
-        targetingInfo: targetingInfo,
-        listener: (MobileAdEvent event) {
-          print(event);
-        });
-  }
-
-//admob
 
   TabController controller;
 
@@ -53,41 +45,21 @@ class _HomePageState extends State<HomePage>
     //admob
     FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
     bannerAd = buildBanner()..load();
-    interstitialAd = buildInterstitial()..load();
     //admob
-  }
-
-  @override
-  void dispose() {
-    //admob
-    bannerAd?.dispose();
-    interstitialAd?.dispose();
-    //admob
-
-    controller.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     bannerAd
       ..load()
-      ..show();
+      ..show(anchorOffset: 100.0);
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
         title: new Row(
           children: <Widget>[
-            //new GradientAppBar("treva"),
-            new Text(
-              "Dr. Oz Tips",
-              style: new TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 3.0,
-                //  fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontFamily: 'Acme',
-              ),
+            new HeaderText(
+              text: 'Dr. Oz Tips',
             ),
           ],
         ),
@@ -128,5 +100,12 @@ class _HomePageState extends State<HomePage>
 
   _returnCardPage() {
     return CardPage();
+  }
+
+  @override
+  void dispose() {
+    bannerAd?.dispose();
+    controller.dispose();
+    super.dispose();
   }
 }
