@@ -3,14 +3,11 @@ import 'package:droztips/pages/list_page.dart';
 import 'package:droztips/widgets/custom_tab.dart';
 import 'package:droztips/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:droztips/widgets/header_text.dart';
+import 'package:droztips/api/ad_factory.dart';
 
 // TODO Encapsulate ADMOB
 // TODO Encapsulate Header Text
-
-const APP_ID = "ca-app-pub-9868823063887131~4682191364";
-//const APP_ID = "ca-app-pub-9868823063887131~4103892275";
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,40 +16,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  //admob
-  static final MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    testDevices: [APP_ID] ?? null,
-    keywords: ['Games', 'Puzzles'],
-  );
-  BannerAd bannerAd;
-
-  BannerAd buildBanner() {
-    return BannerAd(
-        adUnitId: BannerAd.testAdUnitId,
-        size: AdSize.banner,
-        listener: (MobileAdEvent event) {
-          print(event);
-        });
-  }
-
   TabController controller;
+  AdFactory ad;
 
   @override
   void initState() {
     super.initState();
     controller = new TabController(length: 3, vsync: this);
 
-    //admob
-    FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
-    bannerAd = buildBanner()..load();
-    //admob
+    ad = new AdFactory()..loadAd();
   }
 
   @override
   Widget build(BuildContext context) {
-    bannerAd
-      ..load()
-      ..show(anchorOffset: 100.0);
+    ad.showAd();
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
@@ -85,8 +62,8 @@ class _HomePageState extends State<HomePage>
           labelColor: Color.fromRGBO(102, 181, 138, 1.0),
           labelStyle: new TextStyle(fontSize: 14.0),
           tabs: <Tab>[
-            CustomTab(tabText: 'Cards', tabIcon: Icons.credit_card),
-            CustomTab(tabText: 'List', tabIcon: Icons.list),
+            CustomTab(tabIcon: Icons.credit_card),
+            CustomTab(tabIcon: Icons.list),
           ],
           controller: controller,
         ),
@@ -104,7 +81,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void dispose() {
-    bannerAd?.dispose();
+    ad.dispose();
     controller.dispose();
     super.dispose();
   }

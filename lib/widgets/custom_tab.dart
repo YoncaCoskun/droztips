@@ -17,15 +17,12 @@ class CustomTab extends StatelessWidget implements Tab {
     );
   }
 
-  // TODO: implement child
   @override
   Widget get child => null;
 
-  // TODO: implement icon
   @override
   Widget get icon => null;
 
-  // TODO: implement text
   @override
   String get text => null;
 }
