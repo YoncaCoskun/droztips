@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:collection';
-import 'package:droztips/api/api.dart';
+import 'dart:io';
 import 'package:droztips/blocs/bloc_provider.dart';
 import 'package:droztips/models/tip.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:droztips/api/firebase_repo.dart';
 
 class ApplicationBloc implements BlocBase {
   final Set<Tip> _favorites = Set<Tip>();
@@ -30,8 +31,7 @@ class ApplicationBloc implements BlocBase {
   Stream<List<Tip>> get outFavorites => _favoritesController.stream;
 
   ApplicationBloc() {
-    // Read all genres from Internet
-    api.getData().then((list) {
+    firebase.getDataFirebase().then((list) {
       _tipList = list;
       inTipList.add(_tipList);
     });

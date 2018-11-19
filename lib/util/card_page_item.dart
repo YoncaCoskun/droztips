@@ -71,7 +71,7 @@ class CardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     timeDilation = 2.0;
 
-    var image = Image.asset(
+    var image = Image.network(
       item.image,
       fit: BoxFit.cover,
       alignment: FractionalOffset(
@@ -79,6 +79,14 @@ class CardItem extends StatelessWidget {
         0.5,
       ),
     );
+    /*Image.asset(
+      item.image,
+      fit: BoxFit.cover,
+      alignment: FractionalOffset(
+        0.6,
+        0.5,
+      ),
+    );*/
 
     var imageOverlayGradient = DecoratedBox(
       decoration: BoxDecoration(

@@ -3,6 +3,8 @@ import 'package:droztips/pages/list_page.dart';
 import 'package:droztips/widgets/custom_tab.dart';
 import 'package:droztips/widgets/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:droztips/widgets/header_text.dart';
+import 'package:droztips/api/ad_factory.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,36 +14,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController controller;
+  AdFactory ad;
 
   @override
   void initState() {
     super.initState();
     controller = new TabController(length: 3, vsync: this);
-  }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+    ad = new AdFactory()..loadAd();
   }
 
   @override
   Widget build(BuildContext context) {
+    ad.showAd();
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Color.fromRGBO(102, 181, 138, 1.0),
         title: new Row(
           children: <Widget>[
-            //new GradientAppBar("treva"),
-            new Text(
-              "Dr. Oz Tips",
-              style: new TextStyle(
-                fontSize: 18.0,
-                letterSpacing: 3.0,
-                //  fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontFamily: 'Acme',
-              ),
+            new HeaderText(
+              text: 'Dr. Oz Tips',
             ),
           ],
         ),
@@ -67,8 +59,8 @@ class _HomePageState extends State<HomePage>
           labelColor: Color.fromRGBO(102, 181, 138, 1.0),
           labelStyle: new TextStyle(fontSize: 14.0),
           tabs: <Tab>[
-            CustomTab(tabText: 'Cards', tabIcon: Icons.credit_card),
-            CustomTab(tabText: 'List', tabIcon: Icons.list),
+            CustomTab(tabIcon: Icons.credit_card),
+            CustomTab(tabIcon: Icons.list),
           ],
           controller: controller,
         ),
@@ -82,5 +74,12 @@ class _HomePageState extends State<HomePage>
 
   _returnCardPage() {
     return CardPage();
+  }
+
+  @override
+  void dispose() {
+    ad.dispose();
+    controller.dispose();
+    super.dispose();
   }
 }
