@@ -128,8 +128,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                                     height: _appBarHeight,
                                     decoration: new BoxDecoration(
                                       image: new DecorationImage(
-                                          image:
-                                              new ExactAssetImage(type.image),
+                                          image: new NetworkImage(type.image),
                                           fit: BoxFit.cover),
                                     ),
                                   ),

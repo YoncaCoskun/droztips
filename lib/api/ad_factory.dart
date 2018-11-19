@@ -1,5 +1,4 @@
 import 'package:firebase_admob/firebase_admob.dart';
-import 'package:flutter/material.dart';
 
 const APP_ID_ANDROID = "ca-app-pub-9868823063887131~4682191364";
 //const APP_ID_IOS = "ca-app-pub-9868823063887131~4103892275";
@@ -30,7 +29,7 @@ class AdFactory {
   showAd() {
     bannerAd
       ..load()
-      ..show(anchorOffset: 50.0);
+      ..show(anchorOffset: 70.0);
   }
 
   dispose() {

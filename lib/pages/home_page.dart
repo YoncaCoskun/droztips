@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:droztips/widgets/header_text.dart';
 import 'package:droztips/api/ad_factory.dart';
 
-// TODO Encapsulate ADMOB
-// TODO Encapsulate Header Text
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
